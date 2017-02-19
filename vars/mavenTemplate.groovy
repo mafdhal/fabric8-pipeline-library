@@ -16,7 +16,8 @@ def call(Map parameters = [:], body) {
                 containers: [
                         [name: 'maven', image: "${mavenImage}", command: 'cat', ttyEnabled: true,
                          envVars: [
-                                 [key: 'MAVEN_OPTS', value: '-Duser.home=/root/']]]],
+                                 [key: 'MAVEN_OPTS', value: '-Duser.home=/root/']]],
+                        [name: 'clients', image: "${clientsImage}", command: 'cat', ttyEnabled: true]],
                 volumes: [secretVolume(secretName: 'jenkins-maven-settings', mountPath: '/root/.m2'),
                           persistentVolumeClaim(claimName: 'jenkins-mvn-local-repo', mountPath: '/root/.mvnrepository'),
                           secretVolume(secretName: 'jenkins-release-gpg', mountPath: '/home/jenkins/.gnupg'),
@@ -33,9 +34,10 @@ def call(Map parameters = [:], body) {
                 containers: [
                         [name: 'maven', image: "${mavenImage}", command: 'cat', ttyEnabled: true,
                          envVars: [
-                                 [key: 'MAVEN_OPTS', value: '-Duser.home=/root/']]]],
+                                 [key: 'MAVEN_OPTS', value: '-Duser.home=/root/']]],
+                        [name: 'clients', image: "${clientsImage}", command: 'cat', ttyEnabled: true, privileged: true]],
                 volumes: [secretVolume(secretName: 'jenkins-maven-settings', mountPath: '/root/.m2'),
-                          persistentVolumeClaim(claimName: 'jenkins-mvn-local-repo', mountPath: '/root/.mvnrepository'),
+                          persistentVolumeClaim(claimName: 'jenkins-mvn-local-repo', mountPath: '/home/jenkins/.mvnrepository'),
                           secretVolume(secretName: 'jenkins-docker-cfg', mountPath: '/home/jenkins/.docker'),
                           secretVolume(secretName: 'jenkins-release-gpg', mountPath: '/home/jenkins/.gnupg'),
                           secretVolume(secretName: 'jenkins-hub-api-token', mountPath: '/home/jenkins/.apitoken'),
