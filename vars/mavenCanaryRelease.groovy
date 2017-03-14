@@ -28,7 +28,7 @@ def call(body) {
     } else {
       if (!s2iMode) {
         retry(3){
-          sh "mvn fabric8:push -Ddocker.push.registry=95.177.136.133:30730"
+          sh "mvn fabric8:push -Ddocker.push.registry=fabric8-docker-registry.default.fcsp.stcs.io:80"
         }
       }
     }
