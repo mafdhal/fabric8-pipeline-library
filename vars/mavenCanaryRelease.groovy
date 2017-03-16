@@ -28,7 +28,7 @@ def call(body) {
     } else {
       if (!s2iMode) {
         retry(3){
-          sh "mvn fabric8:push -Ddocker.push.registry=docker.stcs.io:5043"
+          sh "mvn fabric8:push -Ddocker.push.registry=docker.stcs.io"
         }
       }
     }
