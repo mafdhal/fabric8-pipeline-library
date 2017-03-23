@@ -28,7 +28,7 @@ def call(body) {
     } else {
       if (!s2iMode) {
         retry(3){
-          sh "mvn fabric8:push -Ddocker.push.registry=docker.stcs.io"
+          sh "mvn fabric8:push -Ddocker.username=stcsadmin -Ddocker.password=qstmavx74 -Ddocker.push.registry=docker.stcs.io"
         }
       }
     }
